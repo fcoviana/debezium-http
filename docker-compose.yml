@@ -1,0 +1,27 @@
+version: '3.1'
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: testdb
+      MYSQL_USER: debezium
+      MYSQL_PASSWORD: debeziumpw
+      MYSQL_ROOT_PASSWORD: rootpw
+    ports:
+      - "3306:3306"
+    command:
+      --server-id=184054
+      --binlog-format=row
+      --log-bin=mysql-bin
+      --binlog-row-image=full
+      --expire_logs_days=1
+      --gtid-mode=ON
+      --enforce-gtid-consistency=ON
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
