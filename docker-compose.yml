@@ -20,8 +20,6 @@ services:
       --enforce-gtid-consistency=ON
     volumes:
       - ./mysql-init:/docker-entrypoint-initdb.d
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8080
+      - mysql-data:/var/lib/mysql
+volumes:
+  mysql-data:
