@@ -1,4 +1,4 @@
-# Debezium HTTP Example
+****# Debezium HTTP Example
 
 Projeto exemplo usando Debezium Embedded para capturar alterações de um banco MySQL e enviar via HTTP para um endpoint REST.
 
@@ -45,12 +45,16 @@ Altere o código se quiser outro destino.
 Acesse o Adminer e crie uma tabela, por exemplo:
 
 ```sql
-CREATE TABLE pessoa (
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255)
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO pessoa (nome) VALUES ('João');
+INSERT INTO users (name, email) VALUES
+('John Doe', 'john.doe@example.com'),
+('Jane Smith', 'jane.smith@example.com');
 ```
 
 ### 5. Teste o recebimento HTTP
